@@ -1,6 +1,13 @@
+/* -------------------------------------------------------------------------- */
+/*                               GO TO MAIN PAGE                              */
+/* -------------------------------------------------------------------------- */
 function goToStart() {
   window.location.href = "./main.html";
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                GENERATE MAP                                */
+/* -------------------------------------------------------------------------- */
 const boardSize = 7; // Adjust the size of the board
 const gameBoard = document.getElementById("game-board");
 
@@ -14,7 +21,6 @@ const map = [
   [8, 8, 8, 8, 8, 8, 8],
   [1, 1, 1, 1, 1, 1, 1],
 ];
-
 
 function createBoard() {
   for (let row = 0; row < boardSize; row++) {
@@ -32,46 +38,76 @@ function createBoard() {
 
 createBoard();
 
+/* -------------------------------------------------------------------------- */
+/*                             TOOLS FUNCTIONALITY                            */
+/* -------------------------------------------------------------------------- */
+
 // check that right tool is selected clicked on
 // click on the right cell with the right tool, if match delete, else nothing
 
-const elementsToolAxe = Array.from(document.querySelectorAll(".card.tool.axe"));
+const elementsToolAxe = Array.from(
+    document.querySelectorAll(".card.tool.axe")
+);
+const elementsToolShovel = Array.from(
+  document.querySelectorAll(".card.tool.shovel")
+);
+const elementsToolPickaxe = Array.from(
+  document.querySelectorAll(".card.tool.pickaxe")
+);
+const elementsCell = Array.from(document.querySelectorAll(".cell"));
+
+let selectedTool = null;
+
 elementsToolAxe.forEach(function (element) {
   element.addEventListener("click", function () {
-    listenTo(1);
+    handleToolSelection(1);
   });
 });
 
-const elementsToolShovel = Array.from(document.querySelectorAll(".card.tool.shovel"));
 elementsToolShovel.forEach(function (element) {
   element.addEventListener("click", function () {
-    listenTo(3);
+    handleToolSelection(3);
   });
 });
 
-const elementsToolPickaxe = Array.from(document.querySelectorAll(".card.tool.pickaxe"));
 elementsToolPickaxe.forEach(function (element) {
   element.addEventListener("click", function () {
-    listenTo(8);
+    handleToolSelection(8);
   });
 });
 
-function listenTo(imgNumber) {
-  const elementsCell = Array.from(document.querySelectorAll(".cell"));
-  elementsCell.forEach(function (element) {
-    element.addEventListener("click", function () {
-      let computedStyle = window.getComputedStyle(element);
+function handleToolSelection(imgNumber) {
+  // Reset background images for all tools
+  elementsToolAxe.forEach((tool) => (tool.style.backgroundImage = ""));
+  elementsToolShovel.forEach((tool) => (tool.style.backgroundImage = ""));
+  elementsToolPickaxe.forEach((tool) => (tool.style.backgroundImage = ""));
 
-      let backgroundImage = computedStyle.getPropertyValue("background-image");
-      if (
-        backgroundImage.includes(`cube_images/${imgNumber}.png`)
-      ) {
-        element.style.backgroundImage = `url('./cube_images/white.PNG')`;
-      } else {
-        
-      }
-      // element.style.backgroundImage = `url('./cube_images/1.PNG')`;
+  // Set the background image for the selected tool
+  const selectedElement = event.target;
+  selectedElement.style.backgroundImage = `url('./cube_images/${imgNumber}.png')`;
+
+  // Update the selected tool
+  selectedTool = imgNumber;
+
+  // Remove event listeners from all cells
+  elementsCell.forEach((element) =>
+    element.removeEventListener("click", handleCellClick)
+  );
+
+  // Add event listener to cells for the selected tool
+  elementsCell.forEach((element) => {
+    element.addEventListener("click", function () {
+      handleCellClick(element);
     });
   });
+}
+
+function handleCellClick(element) {
+  let computedStyle = window.getComputedStyle(element);
+  let backgroundImage = computedStyle.getPropertyValue("background-image");
+
+  if (backgroundImage.includes(`cube_images/${selectedTool}.png`)) {
+    element.style.backgroundImage = `url('./cube_images/white.PNG')`;
+  }
 }
 
