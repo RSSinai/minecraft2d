@@ -1,6 +1,7 @@
 function goToStart()
 {
     window.location.href = './main.html'
+    
 }
 const boardSize = 7; // Adjust the size of the board
 const gameBoard = document.getElementById('game-board');
@@ -11,9 +12,9 @@ const map = [
     [1, 1, 3,1,1,1,1],
     [1, 1, 3,1,1,1,1],
     [1, 1, 3,1,1,1,1],
-    [7, 8, 1,1,1,3,1],
-    [7, 8, 1,1,1,3,3],
-    [7, 8, 1,1,1,3,3],
+    [8, 8, 3,3,3,3,8],
+    [8, 8, 8,8,8,8,8],
+    [1, 1, 1,1,1,1,1],
 ];
 
 function createBoard() {
@@ -31,3 +32,50 @@ function createBoard() {
 }
 
 createBoard();
+
+// clicking a cell will delete cell
+
+function checkback(imgNumber, callback) {
+    const elementsCell = Array.from(document.querySelectorAll('.cell'));
+
+    elementsCell.forEach(function(element) {
+        element.addEventListener('click', function() {
+            var computedStyle = window.getComputedStyle(element);
+            var backgroundImage = computedStyle.getPropertyValue('background-image');
+
+            if (backgroundImage.includes(`cube_images/${imgNumber}.png`)) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        });
+    });
+}
+
+const elementsToolAxe = Array.from(document.querySelectorAll('.card.tool.axe'));
+
+elementsToolAxe.forEach(function(element) {
+    element.addEventListener('click', function() {
+        checkback(1, function(isMatch) {
+            if (isMatch) {
+                console.log('righttt');
+            }
+        });
+    });
+});
+
+const elementsToolShovel = Array.from(document.querySelectorAll('.card.tool.shovel'));
+elementsToolShovel.forEach(function(element) {
+    element.addEventListener('click', function() {
+        localStorage.setItem('shovel',1)
+    });
+});
+
+const elementsToolPickaxe = Array.from(document.querySelectorAll('.card.tool.pickaxe'));
+elementsToolPickaxe.forEach(function(element) {
+    element.addEventListener('click', function() {
+        localStorage.setItem('pickaxe',1)
+    });
+});
+
+
