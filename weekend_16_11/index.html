@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Minecraft - 2D</title>
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz@1,9..40&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="welcome-container">
-        <div class="center">
-          <button class="flat-button" onclick="goToStart()">Start game</button>
+      <div class="center">
+        <div class="rules-container">
+          <h2>Game Rules</h2>
+          <ul>
+            <li> ⭐ Step 1: Click 'Start Game'.</li>
+            <li> ⭐ Step 2: Choose a Tool to work with</li>
+            <li> ⭐ Step 3: Answer simple question (I hope you know HTML).</li>
+            <li> ⭐ Step 4: Click on the cell you want to take.</li>
+          </ul>
         </div>
+        <button class="flat-button" onclick="goToStart()">Start game</button>
       </div>
-    <div ></div>
+    </div>
+
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
