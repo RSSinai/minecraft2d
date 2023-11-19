@@ -5,27 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2D Minecraft Game</title>
     <link rel="stylesheet" href="./main_style.css" />
+    <link rel="icon" type="image/x-icon" href="./cube_images/favicon.ico" />
   </head>
   <body>
-    <!-- <audio controls autoplay hidden>
-        <source src="./music/music.ogg" type="audio/ogg" >
-        Your browser does not support the audio element.
-    </audio> -->
+    <audio controls autoplay hidden>
+      <source src="./music/music.ogg" type="audio/ogg" />
+      Your browser does not support the audio element.
+    </audio>
     <div id="sidebar">
-        <div class="section" id="tools">
-            <h3>Tools</h3>
-            <div class="card tool axe"></div>
-            <div class="card tool pickaxe"></div>
-            <div class="card tool shovel"></div>
-        </div>
-        <div class="section" id="inventory">
-            <h3>Inventory</h3>
-            <!-- Add content for the inventory section if needed -->
-        </div>
+      <div class="section" id="tools">
+        <h3>Tools</h3>
+        <div class="card tool axe"></div>
+        <div class="card tool pickaxe"></div>
+        <div class="card tool shovel"></div>
+      </div>
+      <div class="section" id="inventory">
+        <h3>Inventory</h3>
+        <div class="last-cell card"></div>
+      </div>
     </div>
-
     <div id="game-board"></div>
-    
+    <script src="./js/inventory.js"></script>
     <script src="./script.js"></script>
+    <script src="./js/tools.js"></script>
   </body>
 </html>
